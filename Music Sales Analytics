@@ -100,3 +100,17 @@ AND inv.InvoiceDate like '2009%'
 GROUP BY emp.EmployeeId
 ORDER BY SUM(Inv.Total) DESC LIMIT 1;
 
+# Show total sales per country in descending order.
+SELECT BillingCountry, SUM(Total) as 'Total Sales'
+FROM chinook.invoices
+GROUP BY BillingCountry
+ORDER BY SUM(Total) DESC;
+
+# Which tracks appear on at least 5 playlists?
+SELECT t.Name as 'Track', COUNT(pt.PlaylistId) AS PlaylistCount
+FROM chinook.tracks t
+JOIN chinook.playlist_track pt
+ON t.TrackId=pt.TrackId
+GROUP BY t.TrackId
+HAVING COUNT(pt.PlaylistId)>=5;
+
